@@ -6,7 +6,9 @@ Repositório destinado ao estudo de Observabilidade e Monitoramento usando Grafa
 ```yaml
 wget <URL>
 tar xvf <prometheus.tar.gz>
-sudo mv prometheus promtool usr/local/bin/
+cd <diretorio_extraido>
+sudo mv prometheus promtool /usr/local/bin/
+sudo mv prometheus.yml /etc/prometheus/
 vim /etc/systemd/system/prometheus.service
     Adicionar o conteudo do arquivo prometheus.serice
 sudo groupadd --system prometheus
@@ -23,5 +25,6 @@ sudo chown -R prometheus:prometheus /var/lib/prometheus/*
 sudo systemctl daemon-reload
 sudo systemctl enable prometheus
 sudo systemctl start prometheus
+sudo systemctl status prometheus
 ```
 
