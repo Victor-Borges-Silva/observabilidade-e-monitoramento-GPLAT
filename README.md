@@ -30,7 +30,7 @@ sudo systemctl status prometheus
 O Prometheus estará executando em seu localhost:9090
 
 
-### **Comandos para instalar o Node_Exporter **
+### **Comandos para instalar o Node_Exporter**
 
 ```yaml
 wget <URL>
@@ -52,7 +52,7 @@ sudo systemctl status node
 
 O Node_exporter estará executando em seu localhost:9100
 
-### **Comandos para instalar o Grafana **
+### **Comandos para instalar o Grafana**
 
 Click na URL (https://grafana.com/grafana/download) e selecione a versão que deseja instalar, após isso só seguir o passo a passo.
 
