@@ -22,7 +22,7 @@ Para executar a aplicação é necessário baixar o imagem docker que contem o s
 Para **testar** o funcionado é possível executar a imagem 
 
 ```yaml
-  docker run -p <local port>:8080 -i aussiearef/shoehub
+  docker run -p 8030:8080 -i aussiearef/shoehub
 ```
 
 # **Criando serviço**
