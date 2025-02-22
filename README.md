@@ -28,3 +28,23 @@ sudo systemctl start prometheus
 sudo systemctl status prometheus
 ```
 
+### **Comandos para instalar o Node_Exporter **
+
+```yaml
+wget <URL>
+tar xvf <node_exporter.tar.gz>
+cd <diretorio_extraido>
+sudo groupadd --system prometheus
+sudo useradd -s /sbin/nologin --system -g prometheus prometheus
+sudo mkdir /var/lib/node/
+sudo mv node_exporter /var/lib/node/
+sudo nano /etc/systemd/system/node.service
+sudo chown -R prometheus:prometheus /var/lib/node
+sudo chmod -R 775 /var/lib/node
+sudo chmod -R 775 /var/lib/node/*
+sudo systemctl daemon-reload
+sudo systemctl start node
+sudo systemctl enable node
+sudo systemctl status node
+```
+
