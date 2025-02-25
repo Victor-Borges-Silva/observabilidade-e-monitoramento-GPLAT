@@ -1,0 +1,11 @@
+[Unit]
+Description=Grafana Loki Log Aggregation System
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/loki -config.file=/etc/loki/loki-local-config.yaml
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
