@@ -1,7 +1,7 @@
 # observabilidade-e-monitoramento-GPLAT
 Repositório destinado ao estudo de Observabilidade e Monitoramento usando Grafana, Prometheus,Loki, Alloy e Tempo
 
-### **Comandos para instalar o Prometheus**
+### **Comandos para instalar o Prometheus - Servidor**
 
 ```yaml
 wget <URL>
@@ -30,7 +30,7 @@ sudo systemctl status prometheus
 O Prometheus estará executando em seu localhost:9090
 
 
-### **Comandos para instalar o Node_Exporter**
+### **Comandos para instalar o Node_Exporter - Alvo**
 
 ```yaml
 wget <URL>
@@ -52,7 +52,7 @@ sudo systemctl status node
 
 O Node_exporter estará executando em seu localhost:9100
 
-### **Comandos para instalar o Grafana**
+### **Comandos para instalar o Grafana - Servidor**
 
 Click na URL (https://grafana.com/grafana/download) e selecione a versão que deseja instalar, após isso só seguir o passo a passo.
 
@@ -67,7 +67,7 @@ sudo systemctl status grafana-server
 ```
 O Grafana está executando em seu seu localhost:300
 
-### **Comandos para instalar o Loki**
+### **Comandos para instalar o Loki - Servidor**
 
 A URL abaixo contem a documentação oficial para instalação onde mostrará difentes forma de fazer a instalação, nessa documentação será explicado como fazer a instalação com download manual da versão desejada do software
 ```yaml
@@ -102,7 +102,7 @@ sudo systemctl enable loki
 sudo systemctl status loki
 ```
 
-### **Comandos para instalar o Promtail**
+### **Comandos para instalar o Promtail - Alvo**
 
 O Promtail é um agente de coleta de logs desenvolvido pelo Grafana para enviar logs ao Loki. Para instala-lo podemos acessar o github oficial e selecionar a versão desejada. 
 https://github.com/grafana/loki/releases
