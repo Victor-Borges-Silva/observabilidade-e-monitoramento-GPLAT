@@ -175,4 +175,18 @@ sudo systemctl status alloy
           instance: "Alloy"
 ```
 
-Após isso o serviço estará disponível tanto para coletar de métricas via Prometheus ou Grafana quando acessivel via navegador
+Após isso o serviço estará disponível tanto para coletar de métricas via Prometheus ou acessivel via navegador
+
+## **Comandos para instalar o Tempo - Servidor**
+O Grafana Tempo é um backend de rastreamento distribuído (distributed tracing) desenvolvido pela Grafana Labs. Ele serve para coletar, armazenar e consultar traces de aplicações distribuídas, ajudando na observabilidade e na análise de desempenho.
+
+Para instala-lo basta acessar o github oficial, link abaixo, e baixar a ultima versão compatível com seu sistema operacional.
+https://github.com/grafana/tempo/releases
+
+```yaml
+wget <versao_desejada>
+sudo dpkg -i <versao_desejada>
+```
+
+Após isso o serviço já será inicado e pode-se conectar o Tempo no Grafana, as configurações padrão já são servem de requisito minimo para o funcionamento. 
+
