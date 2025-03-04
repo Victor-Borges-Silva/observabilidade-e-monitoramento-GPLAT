@@ -1,7 +1,9 @@
 # observabilidade-e-monitoramento-GPLAT
 Repositório destinado ao estudo de Observabilidade e Monitoramento usando Grafana, Prometheus,Loki, Alloy e Tempo
 
-### **Comandos para instalar o Prometheus - Servidor**
+Toda explicação, instalação e configuração foi pensada no sistema operacional Ubuntu amd64
+
+## **Comandos para instalar o Prometheus - Servidor**
 
 ```yaml
 wget <URL>
@@ -30,7 +32,7 @@ sudo systemctl status prometheus
 O Prometheus estará executando em seu localhost:9090
 
 
-### **Comandos para instalar o Node_Exporter - Alvo**
+## **Comandos para instalar o Node_Exporter - Alvo**
 
 ```yaml
 wget <URL>
@@ -52,7 +54,7 @@ sudo systemctl status node
 
 O Node_exporter estará executando em seu localhost:9100
 
-### **Comandos para instalar o Grafana - Servidor**
+## **Comandos para instalar o Grafana - Servidor**
 
 Click na URL (https://grafana.com/grafana/download) e selecione a versão que deseja instalar, após isso só seguir o passo a passo.
 
@@ -67,7 +69,7 @@ sudo systemctl status grafana-server
 ```
 O Grafana está executando em seu seu localhost:300
 
-### **Comandos para instalar o Loki - Servidor**
+## **Comandos para instalar o Loki - Servidor**
 
 A URL abaixo contem a documentação oficial para instalação onde mostrará difentes forma de fazer a instalação, nessa documentação será explicado como fazer a instalação com download manual da versão desejada do software
 ```yaml
@@ -102,7 +104,7 @@ sudo systemctl enable loki
 sudo systemctl status loki
 ```
 
-### **Comandos para instalar o Promtail - Alvo**
+## **Comandos para instalar o Promtail - Alvo**
 
 O Promtail é um agente de coleta de logs desenvolvido pelo Grafana para enviar logs ao Loki. Para instala-lo podemos acessar o github oficial e selecionar a versão desejada. 
 https://github.com/grafana/loki/releases
@@ -133,3 +135,44 @@ sudo systemctl start loki
 sudo systemctl enable loki
 sudo systemctl status loki
 ```
+## **Comandos para instalar o Alloy - Servidor**
+Grafana Alloy, ele é um agente de observabilidade desenvolvido pela Grafana Labs. Ele funciona como um coletor de métricas, logs e rastreamentos (traces) e pode ser usado para enviar dados para o Prometheus, Loki, Tempo, OpenTelemetry e outras ferramentas de monitoramento.
+
+Para instalação remocenda-se seguir a documentação que está no link a abaixo, mas também é possível seguir o tutorial abaixo.
+https://grafana.com/docs/alloy/latest/set-up/install/linux/
+
+Para instalar basta seguir os comandos abaixo
+```yaml
+sudo mkdir -p /etc/apt/keyrings/
+wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
+sudo apt-get update
+sudo apt-get install alloy
+```
+
+Agora com o serviço instalado é necessário configura-lo e pra isso vamos precisar mexer em 2 arquivo
+    * etc/default/alloy
+    * /etc/alloy/config.alloy
+
+#### **etc/default/alloy**
+Para configurar o Alloy basta copiar e colar o conteudo do arquivo alloy/alloy-default.txt
+
+#### **/etc/alloy/config.alloy**
+Para configurar o Alloy basta copiar e colar o conteudo do arquivo alloy/config.alloy
+
+Agora para habilitar o serviço do Alloy executar mesmo que a máquina seja reiniciada siga o passo a passo abaixo
+```yaml
+sudo systemctl enable alloy.service
+sudo systemctl start alloy
+sudo systemctl status alloy
+```
+#### **É importante lembrar que no final da instalação e configuração do Alloy é necessário criar um novo target no prometheus**
+```yaml
+  - job_name: "Alloy"
+    static_configs:
+      - targets: ['localhost:12345']
+        labels:
+          instance: "Alloy"
+```
+
+Após isso o serviço estará disponível tanto para coletar de métricas via Prometheus ou Grafana quando acessivel via navegador

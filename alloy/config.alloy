@@ -1,0 +1,47 @@
+// Sample config for Alloy.
+//
+// For a full configuration reference, see https://grafana.com/docs/alloy
+logging {
+  level  = "debug"
+  format = "logfmt" 
+}
+//Receber Telemetria e também é onde o servico está acessivel no navegador.
+otelcol.receiver.otlp "default" {
+  http {
+    endpoint="0.0.0.0:4318"
+ }
+
+//Processar Telemetria
+  output {
+    metrics = [otelcol.processor.batch.default.input]
+    logs    = [otelcol.processor.batch.default.input]
+    traces  = [otelcol.processor.batch.default.input]
+  }
+}
+
+//Exportar Telemetria
+otelcol.processor.batch "default" {
+  output {
+    metrics = [otelcol.exporter.prometheus.default.input]
+    logs    = [otelcol.exporter.prometheus.default.input]
+    traces  = [otelcol.exporter.prometheus.default.input]
+  }
+}
+
+//Destino Telemetria
+otelcol.exporter.prometheus "default" {
+  forward_to = [prometheus.remote_write.default.receiver]
+}
+
+prometheus.remote_write "default" {
+  // Send metrics to a locally running Mimir.
+  endpoint {
+    url = "http://localhost:9090/api/v1/write"
+
+    basic_auth {
+      username = "admin"
+      password = "admin"
+    }
+  }
+}
+

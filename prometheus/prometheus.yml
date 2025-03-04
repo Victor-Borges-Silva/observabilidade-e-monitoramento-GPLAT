@@ -29,3 +29,21 @@ scrape_configs:
       - targets: ["localhost:9090"]
         labels:
           instance: "Servidor-Prometheus"
+
+  - job_name: "App-Web"
+    static_configs:
+      - targets: ["172.31.27.237:9100"]
+        labels:
+          instance: "App-Web"
+
+  - job_name: "shoehub"
+    static_configs:
+      - targets: ["localhost:8030"]
+        labels:
+          instance: "ShoeHub"
+
+  - job_name: "Alloy"
+    static_configs:
+      - targets: ['localhost:12345']
+        labels:
+          instance: "Alloy"
